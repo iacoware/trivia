@@ -7,12 +7,13 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.Random;
 
 public class SomeTest {
 
 	@Test
 	public void runGame() throws FileNotFoundException {
 		System.setOut(new PrintStream("trivia-output-2.txt"));
-		GameRunner.main(null);
+		GameRunner.run(new Random(11));
 	}
 }
