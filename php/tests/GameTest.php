@@ -5,9 +5,12 @@ use PHPUnit\Framework\TestCase;
 
 class GoldenMasterTest extends TestCase
 {
+    const GOLDEN_MASTER = 'trivia-golden-master.txt';
+    const CURRENT_OUTPUT = 'trivia-current-output.txt';
+
     public function testGameRun()
     {
-        $ob_file = fopen('trivia-current-output.txt', 'w');
+        $ob_file = fopen(self::CURRENT_OUTPUT, 'w');
         $ob_file_callback = function($buffer) use ($ob_file) {
             fwrite($ob_file, $buffer);
         };
@@ -18,9 +21,8 @@ class GoldenMasterTest extends TestCase
 
         ob_end_flush();
 
-        $golden_master = file_get_contents('trivia-golden-master.txt');
-        $current_output = file_get_contents('trivia-current-output.txt');
-
+        $golden_master = file_get_contents(self::GOLDEN_MASTER);
+        $current_output = file_get_contents(self::CURRENT_OUTPUT);
         $this->assertEquals($golden_master, $current_output);
     }
 }
