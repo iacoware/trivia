@@ -25,7 +25,9 @@ public class GoldenMasterTest {
 		System.setOut(new PrintStream(RUN_OUTPUT));
 
 		try {
-			GameRunner.run(new Random(11));
+			for (int i = 0; i < 1; i++) {
+				GameRunner.run(new Random(11));
+			}
 		} finally {
 			System.setOut(prevOut);
 		}
