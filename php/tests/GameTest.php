@@ -3,7 +3,7 @@
 include __DIR__.'/../GameShell.php';
 use PHPUnit\Framework\TestCase;
 
-class StackTest extends TestCase
+class GoldenMasterTest extends TestCase
 {
     public function testGameRun()
     {
