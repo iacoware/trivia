@@ -12,6 +12,7 @@ class StackTest extends TestCase
 
     public function testGameRun()
     {
+        srand(11);
         run();
     }
 }
