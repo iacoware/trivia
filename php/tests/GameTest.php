@@ -7,7 +7,7 @@ class StackTest extends TestCase
 {
     public function testGameRun()
     {
-        $ob_file = fopen('php-trivia-output-2.txt', 'w');
+        $ob_file = fopen('trivia-current-output.txt', 'w');
         $ob_file_callback = function($buffer) use ($ob_file) {
             fwrite($ob_file, $buffer);
         };
