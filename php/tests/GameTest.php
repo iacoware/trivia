@@ -10,14 +10,17 @@ class GoldenMasterTest extends TestCase
 
     public function testGameRun()
     {
+        //$ob_file = fopen(self::GOLDEN_MASTER, 'w');
         $ob_file = fopen(self::CURRENT_OUTPUT, 'w');
         $ob_file_callback = function($buffer) use ($ob_file) {
             fwrite($ob_file, $buffer);
         };
         ob_start($ob_file_callback);
 
-        srand(11);
-        run();
+        for($i = 0; $i < 10; $i++) {
+            srand(11 * $i);
+            run();
+        }
 
         ob_end_flush();
 
