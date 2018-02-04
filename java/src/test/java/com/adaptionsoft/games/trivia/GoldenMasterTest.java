@@ -3,6 +3,7 @@ package com.adaptionsoft.games.trivia;
 import static org.junit.Assert.*;
 
 import com.adaptionsoft.games.trivia.runner.GameRunner;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,8 +21,14 @@ public class GoldenMasterTest {
 
 	@Test
 	public void runGame() throws IOException {
+		PrintStream prevOut = System.out;
 		System.setOut(new PrintStream(RUN_OUTPUT));
-		GameRunner.run(new Random(11));
+
+		try {
+			GameRunner.run(new Random(11));
+		} finally {
+			System.setOut(prevOut);
+		}
 
 		assertEquals(contentOf(GOLDEN_MASTER), contentOf(RUN_OUTPUT));
 	}
