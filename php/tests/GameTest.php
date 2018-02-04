@@ -17,6 +17,11 @@ class GoldenMasterTest extends TestCase
         run();
 
         ob_end_flush();
+
+        $golden_master = file_get_contents('trivia-golden-master.txt');
+        $current_output = file_get_contents('trivia-current-output.txt');
+
+        $this->assertEquals($golden_master, $current_output);
     }
 }
 ?>
