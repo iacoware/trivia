@@ -9,11 +9,15 @@ namespace Trivia
         [Fact]
         public void RunGame()
         {
-            using (var writer = File.CreateText(@"trivia-output.txt"))
+            using (var writer = File.CreateText(@"trivia-master.txt"))
             {
                 Console.SetOut(writer);
                 GameRunner.Run(new Random(11));
             }
+
+            Assert.Equal(
+                File.ReadAllText("trivia-master.txt"),
+                File.ReadAllText("trivia-output.txt"));
         }
     }
 }
