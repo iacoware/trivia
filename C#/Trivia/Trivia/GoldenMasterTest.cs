@@ -14,22 +14,41 @@ namespace Trivia
             File.Delete(TriviaOutput);
         }
 
+        [Fact(Skip = "Run only when we need to update the golden master")]
+        public void UpdateMaster()
+        {
+            MultipleRuns(TriviaMaster);
+        }
+
         [Fact]
         public void RunGame()
         {
-            for (int i = 0; i < 100; i++)
-            {
-                //using (var writer = File.CreateText(TriviaMaster))
-                using (var writer = File.CreateText(TriviaOutput))
-                {
-                    Console.SetOut(writer);
-                    GameRunner.Run(new Random(i * 11));
-                }
-            }
+            MultipleRuns(TriviaOutput);
 
             Assert.Equal(
                 File.ReadAllText(TriviaMaster),
                 File.ReadAllText(TriviaOutput));
+        }
+
+        static void MultipleRuns(string outputFile)
+        {
+            var prevConsoleOut = Console.Out;
+
+            try
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    using (var writer = File.CreateText(outputFile))
+                    {
+                        Console.SetOut(writer);
+                        GameRunner.Run(new Random(i * 11));
+                    }
+                }
+            }
+            finally
+            {
+                Console.SetOut(prevConsoleOut);
+            }
         }
     }
 }
