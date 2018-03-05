@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Xunit;
 
 namespace Trivia
@@ -8,7 +9,11 @@ namespace Trivia
         [Fact]
         public void RunGame()
         {
-            GameRunner.Run(new Random(11));
+            using (var writer = File.CreateText(@"trivia-output.txt"))
+            {
+                Console.SetOut(writer);
+                GameRunner.Run(new Random(11));
+            }
         }
     }
 }
