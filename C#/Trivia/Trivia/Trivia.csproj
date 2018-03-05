@@ -89,7 +89,7 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="GameRunner.cs" />
-    <Compile Include="GameRunnerTest.cs" />
+    <Compile Include="GoldenMasterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

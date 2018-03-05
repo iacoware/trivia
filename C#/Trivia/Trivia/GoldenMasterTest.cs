@@ -4,20 +4,32 @@ using Xunit;
 
 namespace Trivia
 {
-    public class GameRunnerTest
+    public class GoldenMasterTest
     {
+        const string TriviaMaster = "trivia-master.txt";
+        const string TriviaOutput = "trivia-output.txt";
+
+        public GoldenMasterTest()
+        {
+            File.Delete(TriviaOutput);
+        }
+
         [Fact]
         public void RunGame()
         {
-            using (var writer = File.CreateText(@"trivia-master.txt"))
+            for (int i = 0; i < 100; i++)
             {
-                Console.SetOut(writer);
-                GameRunner.Run(new Random(11));
+                //using (var writer = File.CreateText(TriviaMaster))
+                using (var writer = File.CreateText(TriviaOutput))
+                {
+                    Console.SetOut(writer);
+                    GameRunner.Run(new Random(i * 11));
+                }
             }
 
             Assert.Equal(
-                File.ReadAllText("trivia-master.txt"),
-                File.ReadAllText("trivia-output.txt"));
+                File.ReadAllText(TriviaMaster),
+                File.ReadAllText(TriviaOutput));
         }
     }
 }
