@@ -3,3 +3,4 @@
 *.csproj.user
 .vs
 packages
+.idea
